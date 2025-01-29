@@ -1,4 +1,5 @@
 import unittest
+
 from app.nlp.tokenizer import Tokenizer
 
 

@@ -1,7 +1,11 @@
+from numpy import ndarray
+from xgboost import Booster
+
 import xgboost as xgb
 import numpy as np
 import pandas as pd
-from app.nlp.tokenizer import Tokenizer  # Import the Tokenizer class
+
+from app.nlp.tokenizer import Tokenizer
 
 # Load the saved model
 model_path = r'/Users/josematos/Dev/Projects/GooseTTS/models/normalization/xgb_model'
@@ -23,7 +27,7 @@ labels = np.array(['PLAIN', 'PUNCT', 'DATE', 'LETTERS', 'CARDINAL', 'VERBATIM', 
 tokenizer = Tokenizer()
 
 
-def preprocess_token(token):
+def preprocess_token(token: str) -> ndarray:
     """Preprocess a token in the same way as the training data."""
     x_row = np.ones(max_num_features, dtype=int) * space_letter
     for xi, i in zip(list(str(token)), np.arange(max_num_features)):
@@ -31,7 +35,7 @@ def preprocess_token(token):
     return x_row
 
 
-def context_window_transform(data, pad_size):
+def context_window_transform(data: list[ndarray], pad_size: int) -> list:
     """Apply the same context window transformation as during training."""
     pre = np.zeros(max_num_features)
     pre = [pre for _ in np.arange(pad_size)]
@@ -47,7 +51,7 @@ def context_window_transform(data, pad_size):
     return neo_data
 
 
-def predict_sentence(sentence, model, labels):
+def predict_sentence(sentence: str, model: Booster, labels: ndarray) -> tuple[list[str], list[ndarray]]:
     """Predict the class for each token in the sentence using the improved tokenizer."""
     tokens = tokenizer.tokenize(sentence)  # Use the Tokenizer class
     x_data = [preprocess_token(token) for token in tokens]
@@ -63,7 +67,7 @@ def predict_sentence(sentence, model, labels):
     return tokens, predicted_labels
 
 
-def save_predictions_to_csv(tokens, predicted_labels, output_path):
+def save_predictions_to_csv(tokens: list[str], predicted_labels: list[ndarray], output_path: str) -> None:
     """Save the predictions to a CSV file."""
     df = pd.DataFrame({
         'token': tokens,

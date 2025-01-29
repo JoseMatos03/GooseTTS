@@ -1,7 +1,9 @@
 import unittest
-from app.nlp.classifier import predict_sentence, preprocess_token, context_window_transform
+
 import numpy as np
 import xgboost as xgb
+
+from app.nlp.classifier import predict_sentence
 
 
 class TestClassifier(unittest.TestCase):

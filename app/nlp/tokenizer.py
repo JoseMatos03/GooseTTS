@@ -20,7 +20,7 @@ class Tokenizer:
             "PUNCT": r"[^\w\s]",  # Punctuation (e.g., .,!?()²)
         }
 
-    def tokenize(self, sentence):
+    def tokenize(self, sentence: str) -> list[str]:
         """
         Tokenizes a sentence into tokens, handling punctuation, special characters, and edge cases.
         """
