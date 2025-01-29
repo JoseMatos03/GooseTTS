@@ -1,0 +1,8 @@
+# Ignore all data files in this directory
+# The files being ignored:
+#   - errors.csv
+#   - pred.csv
+*
+
+# except for this one.
+!.gitignore

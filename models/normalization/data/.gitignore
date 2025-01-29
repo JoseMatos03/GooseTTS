@@ -1,0 +1,11 @@
+# Ignore all data files in this directory
+# The files being ignored:
+#   - en_sample_submission_2.csv
+#   - en_sample_submission.csv
+#   - en_test_2.csv
+#   - en_test.csv
+#   - en_train.csv
+*
+
+# except for this one.
+!.gitignore
